@@ -10,14 +10,14 @@ Created on Wed Mar 27 13:44:29 2019
 import pandas as pd 
 import numpy as np
 
-#====================== Reading the Data============================#
+#====================== Reading the Data============================
 
-Df = pd.read_table('us_perm_visas.txt')
+Df = pd.read_table("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/us_perm_visas.txt")
 
 #====================== Task 1====================#
 """according to https://data.oecd.org/entrepreneur/enterprises-by-business-size.htm the 0 to 10 employee is micro size enterprise, 11-49 Smalll, 
 50-249 medium, 250-inf large"""
-Df.head()
+
 Df.replace('', -1, inplace=True)
 Df['employer_num_employees'].fillna(-1, inplace = True)
 
@@ -61,3 +61,6 @@ Df.loc[Df['class_of_admission'].isin(California_center_visa),'Center'] = 'CA'
 Df.loc[Df['class_of_admission'].isin(Both_centers_visa),'Center'] ='CA or VT'
 
 #=================================== Task 3=======================
+groups = Df.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offer_from_9089']].max()
+#Df.loc[Df.groupby('wage_offer_unit_of_pay_9089')['wage_offer_from_9089'].idxmax()]
+#Df['wage_max']
