@@ -53,11 +53,11 @@ Both_centers_visa = ['H-1B','H-1B2','H-1B','O-1A', 'O-1B','O-2',
 Df['Center'] = 'Unknown'
 
 
-VT_state_index = Df.loc[Df['employer_state'].isin(Vermont_center_states),'Center'] = 'VT'
-VT_visa_index = Df.loc[Df['class_of_admission'].isin(Vermont_center_visa),'Center'] ='VT'
+Df.loc[Df['employer_state'].isin(Vermont_center_states),'Center'] = 'VT'
+Df.loc[Df['class_of_admission'].isin(Vermont_center_visa),'Center'] ='VT'
 
-CA_state_index = Df.loc[Df['employer_state'].isin(California_center_states),'Center'] = 'CA'
-CA_visa_index = Df.loc[Df['class_of_admission'].isin(California_center_visa),'Center'] = 'CA'
-both_visa_index = Df.loc[Df['class_of_admission'].isin(Both_centers_visa),'Center'] ='CA or VT'
+Df.loc[Df['employer_state'].isin(California_center_states),'Center'] = 'CA'
+Df.loc[Df['class_of_admission'].isin(California_center_visa),'Center'] = 'CA'
+Df.loc[Df['class_of_admission'].isin(Both_centers_visa),'Center'] ='CA or VT'
 
 #=================================== Task 3=======================
