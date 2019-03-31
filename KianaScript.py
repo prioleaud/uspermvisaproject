@@ -27,7 +27,7 @@ bins = [-1,0, 10, 49, 249,np.inf]
 names = ['Unknown', 'Micro', 'Small', 'Medium', 'Large']
 
 Df['employer_size'] = pd.cut(Df['employer_num_employees'], bins, labels=names)
-Df.to_csv("data.txt", sep='\t')
+
 
 #=========================== Task 2 =======
 """this information has been gathered from this page"""
@@ -60,7 +60,13 @@ Df.loc[Df['employer_state'].isin(California_center_states),'Center'] = 'CA'
 Df.loc[Df['class_of_admission'].isin(California_center_visa),'Center'] = 'CA'
 Df.loc[Df['class_of_admission'].isin(Both_centers_visa),'Center'] ='CA or VT'
 
-#=================================== Task 3=======================
+#=================================== Task 3======================================================
 groups = Df.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offer_from_9089']].max()
 #Df.loc[Df.groupby('wage_offer_unit_of_pay_9089')['wage_offer_from_9089'].idxmax()]
 #Df['wage_max']
+Df.to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/output.csv", index=False)
+#==================================== Mahdi task 1=================================================
+Df['country_of_citizenship'].fillna(" ", inplace = True)
+Df['country'].fillna(" ", inplace = True)
+Df['Country_final']=Df['country_of_citizenship'].astype(str)+Df['country'].astype(str)
+Df.to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/output.csv", index=False)
