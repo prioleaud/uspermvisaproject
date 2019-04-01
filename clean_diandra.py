@@ -26,3 +26,7 @@ visa_data.columns = new_header #set the header row as the df header
 #country from second column for country_of_citzenship 
 visa_data['country_of_citizenship'] = np.where(visa_data['country_of_citizenship'] \
          == '',visa_data['country_of_citzenship'],visa_data['country_of_citizenship'])
+
+#If country_of_citizenship is still empty, replace with "Unknown"
+visa_data['country_of_citizenship'] = np.where(visa_data['country_of_citizenship'] \
+         == '',"Unknown",visa_data['country_of_citizenship'])
