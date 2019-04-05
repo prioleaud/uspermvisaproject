@@ -34,8 +34,12 @@ visa_data['country_of_citizenship'] = np.where(visa_data['country_of_citizenship
 #Remove instances if empty:
 visa_data = visa_data[visa_data['case_status'] != '']
 visa_data = visa_data[visa_data['decision_date'] != '']
-visa_data =visa_data[visa_data['foreign_worker_info_education'] != '']
-visa_data = visa_data[visa_data['job_info_major'] != '']
+
+print(visa_data)
+visa_data =visa_data[(visa_data['foreign_worker_info_education'] != '') & (visa_data['job_info_major'] != '')]
+
+print(visa_data)
+#visa_data = visa_data[visa_data['job_info_major'] != '']
 visa_data = visa_data[visa_data['job_info_alt_combo_ed'] != '']
 
 print(visa_data)
@@ -79,4 +83,40 @@ visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9
 
 visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9089'] \
          == 'mth',visa_data['wage_offer_from_9089']*12, \
+         visa_data['wage_offer_from_9089'])
+
+
+
+
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'Hour',visa_data['wage_offered_from_9089']*2080, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'hr',visa_data['wage_offered_from_9089']*2080, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'Week',visa_data['wage_offered_from_9089']*52, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'wk',visa_data['wage_offered_from_9089']*52, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'Bi-Weekly',visa_data['wage_offered_from_9089']*26, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'bi',visa_data['wage_offered_from_9089']*26, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'Month',visa_data['wage_offered_from_9089']*12, \
+         visa_data['wage_offered_from_9089'])
+
+visa_data['wage_offered_from_9089'] = np.where(visa_data['wage_offered_unit_of_pay_9089'] \
+         == 'mth',visa_data['wage_offered_from_9089']*12, \
          visa_data['wage_offer_from_9089'])
