@@ -14,7 +14,7 @@ import numpy as np
 
 Df = pd.read_table("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/us_perm_visas.txt")
 
-#====================== Task 1====================#
+#====================== Define rnage for employer size====================#
 """according to https://data.oecd.org/entrepreneur/enterprises-by-business-size.htm the 0 to 10 employee is micro size enterprise, 11-49 Smalll, 
 50-249 medium, 250-inf large"""
 
@@ -29,7 +29,7 @@ names = ['Unknown', 'Micro', 'Small', 'Medium', 'Large']
 Df['employer_size'] = pd.cut(Df['employer_num_employees'], bins, labels=names)
 
 
-#=========================== Task 2 =======
+#=========================== mapping of applications to centers =======
 """this information has been gathered from this page"""
 California_center_states = ['Alaska','Arizona','California','Colorado','Commonwealth of the Northern Mariana Islands',
                     'Florida','Georgia','Guam','Hawaii','Idaho','Illinois','Indiana',
@@ -60,13 +60,11 @@ Df.loc[Df['employer_state'].isin(California_center_states),'Center'] = 'CA'
 Df.loc[Df['class_of_admission'].isin(California_center_visa),'Center'] = 'CA'
 Df.loc[Df['class_of_admission'].isin(Both_centers_visa),'Center'] ='CA or VT'
 
-#=================================== Task 3======================================================
+#=================================== Finding max wage offer======================================================
 groups = Df.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offer_from_9089']].max()
 #Df.loc[Df.groupby('wage_offer_unit_of_pay_9089')['wage_offer_from_9089'].idxmax()]
 #Df['wage_max']
-Df.to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/output.csv", index=False)
-#==================================== Mahdi task 1=================================================
-Df['country_of_citizenship'].fillna(" ", inplace = True)
-Df['country'].fillna(" ", inplace = True)
-Df['Country_final']=Df['country_of_citizenship'].astype(str)+Df['country'].astype(str)
-Df.to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/output.csv", index=False)
+#Df.to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/output.csv", index=False)
+
+
+#==========
