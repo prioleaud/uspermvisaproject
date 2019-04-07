@@ -70,19 +70,44 @@ groups = Df.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offe
 
 Agriculture_careers= ['agribusiness systems','agribusiness','animal systems', 'environmental', 'agriculture','food','natural resource systems','natural resource', 'food products','plant systems','power', 'structural and technical systems','structural system', 'technical system', 'power systems'];
 Architecture_majors = ['architecture','mechanical construction', 'construction','design','pre-construction','maintenance','operations','accoustic'];
-Arts_majors =['arts','A/V technology and film','film','movie','journalism','communications','broadcasting','performing arts','printing technology','telecommunications','liberal arts', 'media','visual arts','arts', 'media studies','drama and cinema'];
+
+Arts_majors =['arts','ACCTING', 'A/V technology and film','film','movie','journalism','communications','broadcasting','performing arts','printing technology','telecommunications','liberal arts', 'media','visual arts','arts', 'media studies','drama and cinema'];
+
+
 Business_majors =['administrative support','business information management','general management','human Resources Management','Operations Management','Business','Management','Administration','ACCOUNTANCY, TAXATION',
-'Accounting','Advertising','Banking','Business Administration','Business Law', 'Business','commerce','buiness administration','financial engineering','finance and marketing','financial management','ACCOUNTING & BUSINESS ADMINISTRATION',
-'Criminal Justice Administration','E-commerce','Economics','Entrepreneurial Studies','Finance','business information technology','agricultural economics','accountancy','ACCOUNTANCY & FINANCE','ACCOUNTANCY/COMMERCE','ACCOUNTING & AUDITING',
-'Health Care Administration','Hospitality Management','Human Resource Management','Management','International Business','business administration (financial management/investment management)','teaching science and technology','teaching english language and literature',
-'Labor Studies','MBA', 'Merchandising and retail','Non-Profit Administration','Operations','Administration','business administration (information technology)','ACCOUNTANCY AND BUSINESS ADMINISTRATION','ACCOUNTING / FINANCE','ACCOUNTING AND FINANCIAL MANAGEMENT'
-'Organizational Behaviour','Project Management','Public Administration and Policy','Public administration','licentiate in public accounting','personnel management','ACCOUNTANT','ACCOUNTING','ACCOUNTANCY AND BUSINESS ADMINISTRATION','ACCOUNTING AND BUSINESS MANAGEMENT','ACCOUNTING AND COMMERCIAL BUSINESS','ACCOUNTING AND COMPUTER INFORMATION SYSTEM',
-'Policy','Public Relations','Real Estate','Secretarial Studies','accounting and finance','management & management information systems','information systems','business administration and information systems','ACCOUNTING AND FINANCIAL ECONOMICS',
-'taxation','Banking','Business','Business Finance','Insurance','london chamber of commerce private secretary certificate','business economics','ACCOUNTANCY & CONTROLLING','ACCOUNTANCY AND INCOME TAX','ACCOUNTING & FINANCE','ACCOUNTING AND AUDITING','ACCOUNTING AND BUSINESS','ACCOUNTING AND BUSINESS ADMINISTRATION','ACCOUNTING AND BUSINESS LAW','ACCOUNTING AND CONTROLLING','ACCOUNTING AND ECONOMICS',''
-'securities and investment','investment','Finance','government and public administration','foreign service','bus. admin with concentration in finance','communication and information studies','ACCOUNTING & ECONOMICS',
-'governance','national security','national','planning','public management','public management and administration','international management','ACCOUNTANCY AND INFORMATION SYSTEMS','ACCOUNTANCY AND LAW','ACCOUNTANCY AND TAX SPECIALIZATION','ACCOUNTANCY WITH CONCENTRATION IN TAXATION','ACCOUNTING & LEGAL STUDIES','ACCOUNTING & MANAGEMENT & MBA','ACCOUNTING & MARKETING','ACCOUNTING & MATH','ACCOUNTING & TAXATION',
-'regulation','revenue','taxation','revenue and taxation','marketing','marketing communications','marketing management','business administration degree with major in accounting','english and international relations',
-'marketing research','professional sales','business/management engineering/accounting and finance','business administration (indian master\'s degree)','business administration and information technology','ACCOUNTING & INFORMATION MANAGEMENT','ACCOUNTING & INFORMATION SYSTEMS','ACCOUNTING & INFORMATION TECHNOLOGY',];
+'ACCOUNTING AND MANAGEMENT','ACCOUNTING AND MANAGEMENT ENGINEERING', 'ACCOUNTING, BUSINESS, FINANCE, SYSTEMS, OR RELATED', 'ACCOUNTING, MANAGEMENT',
+'Accounting','Advertising','Banking','Business Administration','Business Law', 'Business','commerce','buiness administration','financial engineering',
+'finance and marketing','financial management','ACCOUNTING & BUSINESS ADMINISTRATION','ACCOUNTING AND MANAGEMENT INFORMATION SYSTEMS','ACCOUNTING INFORMATION SYSTEMS',
+'ACCOUNTING, COMMERCE AND FINANCE','ACCOUNTING, MANGEMENT INFORMATION SYSTEMS & ECONOMNICS','Criminal Justice Administration','E-commerce','Economics','Entrepreneurial Studies',
+'Finance','business information technology','agricultural economics','accountancy','ACCOUNTANCY & FINANCE','ACCOUNTANCY/COMMERCE','ACCOUNTING & AUDITING','ACCOUNTING AND MATHEMATICS',
+'ACCOUNTING IN INFORMATION ASSURANCE','ACCOUNTING, COMMERCE, COSTING & BUSINESS MGT','ACCOUNTING, MARKETING AND FINANCE','Health Care Administration','Hospitality Management',
+'Human Resource Management','Management','International Business','business administration (financial management/investment management)','teaching science and technology',
+'teaching english language and literature','ACCOUNTING AND TAXATION','ACCOUNTING PUBLIC/ BUSINESS ADMINISTRATION','ACCOUNTING, LEGAL STUDIES',
+'Labor Studies','MBA', 'Merchandising and retail','Non-Profit Administration','Operations','Administration','business administration (information technology)',
+'ACCOUNTANCY AND BUSINESS ADMINISTRATION','ACCOUNTING / FINANCE','ACCOUNTING AND FINANCIAL MANAGEMENT','ACCOUNTING AND LAW','ACCOUNTING MANAGEMENT','ACCOUNTING, FINANCE',
+'ACCOUNTING, FINANCE AND TAXATION',
+'Organizational Behaviour','Project Management','Public Administration and Policy','Public administration','licentiate in public accounting','personnel management','ACCOUNTANT',
+'ACCOUNTING','ACCOUNTANCY AND BUSINESS ADMINISTRATION','ACCOUNTING AND BUSINESS MANAGEMENT','ACCOUNTING AND COMMERCIAL BUSINESS','ACCOUNTING AND COMPUTER INFORMATION SYSTEM',
+'ACCOUNTING, TECHNOLOGY AND COMMERCE','ACCOUNTING,AUDITING, BUSINESS ADMIN,FINANCIAL ANALYSIS,CORPORATE LAW,COST ACCOUNTING, RELATED',
+'ACCOUNTING; BUSINESS ADMINISTRATION','ACCOUNTING/ BUSINESS ADMINISTRATION','ACCOUNTING/ FINANCE AND ECONOMICS','ACCOUNTING/ TAXATION','ACCOUNTING/ACCOUNTANCY',
+'ACCOUNTING/AUDITING/COSTING/TAXATION','ACCOUNTING/BUSINESS','ACCOUNTING/BUSINESS ADMINISTRATION', 'ACCOUNTING/CPA', 'ACCOUNTING/MANAGEMENT INFORMATION SYSTEM', 
+'ACCOUNTING/PROFESSIONAL ACCOUNTANCY', 'ACCOUNTING/PUBLIC ACCOUNTING', 
+'Policy','Public Relations','Real Estate','Secretarial Studies','accounting and finance','management & management information systems','information systems',
+'business administration and information systems','ACCOUNTING AND FINANCIAL ECONOMICS','ACCOUNTING AND INFORMATION TECHNOLOGY','ACCOUNTING PUBLIC',
+'ACCOUNTING, BUSINESS METHOD, ECONOMICS',
+'taxation','Banking','Business','Business Finance','Insurance','london chamber of commerce private secretary certificate','business economics',
+'ACCOUNTANCY & CONTROLLING','ACCOUNTANCY AND INCOME TAX','ACCOUNTING & FINANCE','ACCOUNTING AND AUDITING','ACCOUNTING AND BUSINESS',
+'ACCOUNTING AND BUSINESS ADMINISTRATION','ACCOUNTING AND BUSINESS LAW','ACCOUNTING AND CONTROLLING','ACCOUNTING AND ECONOMICS',''
+'securities and investment','investment','Finance','government and public administration','foreign service','bus. admin with concentration in finance',
+'communication and information studies','ACCOUNTING & ECONOMICS','ACCOUNTING AND INFORMATION SYSTEMS','ACCOUNTING AND INTERNATIONAL BUSINESS','ACCOUNTS/COMMERCE',
+'governance','national security','national','planning','public management','public management and administration','international management',
+'ACCOUNTANCY AND INFORMATION SYSTEMS','ACCOUNTANCY AND LAW','ACCOUNTANCY AND TAX SPECIALIZATION','ACCOUNTANCY WITH CONCENTRATION IN TAXATION',
+'ACCOUNTING & LEGAL STUDIES','ACCOUNTING & MANAGEMENT & MBA','ACCOUNTING & MARKETING','ACCOUNTING & MATH','ACCOUNTING & TAXATION',
+'regulation','revenue','taxation','revenue and taxation','marketing','marketing communications','marketing management','business administration degree with major in accounting',
+'english and international relations','ACCOUNTING AND INDUSTRIAL MANAGEMENT','ACCOUNTING AND INFORMATION MANAGEMENT','ACCOUNTING, BUSINESS STATISTICS, AUDITING AND TAXATION',
+'marketing research','professional sales','business/management engineering/accounting and finance','business administration (indian master\'s degree)',
+'business administration and information technology','ACCOUNTING & INFORMATION MANAGEMENT','ACCOUNTING & INFORMATION SYSTEMS','ACCOUNTING & INFORMATION TECHNOLOGY',
+'ACCOUNTING SCIENCE','ACCOUNTING, BUSINESS ADMINISTRATION, COMMERCE','ACCOUNTS'];
 
 
 Education_majors =['Education','Training','Teaching','Training','Administration','Administrative','chinese','teaching mathematics','school building leader','instructional technology',
