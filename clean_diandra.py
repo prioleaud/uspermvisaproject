@@ -10,6 +10,23 @@ import numpy as np
 import csv
 import os
 import pandas
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+ 
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+ 
+    return False
+
 pandas.options.mode.use_inf_as_na = True
 
 path = os.path.join(os.path.dirname(__file__), 'us_perm_visas.txt')
@@ -59,15 +76,18 @@ visa_data['wage_offer_unit_of_pay_9089'] = np.where(visa_data['wage_offer_from_9
 
 print(visa_data['wage_offer_from_9089'])
 
-
-visa_data = visa_data[visa_data['wage_offer_from_9089'] != '']
-visa_data = visa_data[visa_data['wage_offer_from_9089'].apply(lambda x: x.isnumeric())]
-#visa_data[~visa_data['wage_offer_from_9089'].applymap(np.isreal).all(1)]
-
-visa_data['wage_offer_from_9089'] = pandas.to_numeric(visa_data['wage_offer_from_9089'])
-
-
 visa_data.to_csv('wage_before.csv',sep=',')
+
+#remove instances with empty wage offer
+visa_data = visa_data[visa_data['wage_offer_from_9089'] != '']
+
+#remove instances if wages is not a number
+visa_data = visa_data[visa_data['wage_offer_from_9089'].apply(lambda x: is_number(x) == True)]
+
+
+visa_data['wage_offer_from_9089'] = pandas.to_numeric(visa_data['wage_offer_from_9089'], downcast = 'float')
+
+
 
 visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9089'] \
          == 'Hour',visa_data['wage_offer_from_9089']*2080, \
