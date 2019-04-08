@@ -34,7 +34,7 @@ def is_number(s):
 # data = open(path, 'rt', encoding='utf-8');
 # reader = csv.reader(data,delimiter='\t',quoting=csv.QUOTE_NONE)
 # visa_data = pandas.DataFrame(list(reader));
-def CleanData(data):
+def CleanData(visa_data):
     new_header = visa_data.iloc[0] #grab the first row for the header
     visa_data = visa_data[1:] #take the data less the header row
     visa_data.columns = new_header #set the header row as the df header
