@@ -32,7 +32,7 @@ path = os.path.join(os.path.dirname(__file__), 'us_perm_visas.txt')
 
 data = open(path, 'rt', encoding='utf-8');
 reader = csv.reader(data,delimiter='\t',quoting=csv.QUOTE_NONE)
-visa_data = pd.DataFrame(list(reader))
+visa_data = pandas.DataFrame(list(reader))
 
 new_header = visa_data.iloc[0] #grab the first row for the header
 visa_data = visa_data[1:] #take the data less the header row
