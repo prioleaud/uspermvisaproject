@@ -10,6 +10,7 @@ from KianaScript import EmployerRangeMapping,StateMapping,MajorMapping, RowMappi
 
 
 path = os.path.join(os.path.dirname(__file__), 'clean_data.csv')
+
 visa_data = pd.read_csv(path)
 
 
@@ -21,11 +22,12 @@ visa_data['Center'] = StateMapping(visa_data)
 visa_data['Career_Cluster'] = MajorMapping(visa_data)
 
 # replace the maximum wage offer part
+#groups = visa_data.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offer_from_9089']].max()
+# groups = visa_data.groupby('wage_offer_unit_of_pay_9089').wage_offer_from_9089.max()
 
-groups = visa_data.groupby(['wage_offer_unit_of_pay_9089'], as_index=False)[['wage_offer_from_9089']].max()
-max_value = groups.get_group('Hour')
 
-print(max_value)
+
+# print(groups)
 
 
 """ select the target variables and form the final data"""

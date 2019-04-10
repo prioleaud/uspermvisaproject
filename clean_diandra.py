@@ -50,10 +50,10 @@ visa_data['country_of_citizenship'] = np.where(visa_data['country_of_citizenship
 #Remove instances if empty:
 visa_data = visa_data[visa_data['case_status'] != '']
 visa_data = visa_data[visa_data['decision_date'] != '']
-print(visa_data)
+#print(visa_data)
 visa_data =visa_data[visa_data['foreign_worker_info_education'] != '']
 visa_data= visa_data[visa_data['job_info_major'] != '']
-print(visa_data)
+#print(visa_data)
 #visa_data =visa_data[(visa_data['foreign_worker_info_education'] != '') & (visa_data['job_info_major'] != '')]
 
 # print(visa_data)
@@ -76,6 +76,8 @@ visa_data['wage_offer_unit_of_pay_9089'] = np.where(visa_data['wage_offer_from_9
 #print(visa_data['wage_offer_from_9089'])
 
 #visa_data.to_csv('wage_before.csv',sep=',')
+#finding the maximum wage number for each category of offers
+
 
 #remove instances with empty wage offer
 visa_data = visa_data[visa_data['wage_offer_from_9089'] != '']
@@ -85,8 +87,26 @@ visa_data = visa_data[visa_data['wage_offer_from_9089'].apply(lambda x: is_numbe
 
 
 visa_data['wage_offer_from_9089'] = pandas.to_numeric(visa_data['wage_offer_from_9089'], downcast = 'float')
+groups = visa_data.groupby('wage_offer_unit_of_pay_9089').wage_offer_from_9089.max()
+max_value_biweek = visa_data[visa_data.wage_offer_unit_of_pay_9089 =='Bi-Weekly'].wage_offer_from_9089.max()
+max_value_hour = visa_data[visa_data.wage_offer_unit_of_pay_9089 =='Hour'].wage_offer_from_9089.max()
+max_value_week = visa_data[visa_data.wage_offer_unit_of_pay_9089 =='Week'].wage_offer_from_9089.max()
+max_value_month = visa_data[visa_data.wage_offer_unit_of_pay_9089 =='Month'].wage_offer_from_9089.max()
+max_value_year = visa_data[visa_data.wage_offer_unit_of_pay_9089 =='Year'].wage_offer_from_9089.max()
+print("maximum value of biweekly is:", max_value_biweek)
+print("maximum value of hourly is:", max_value_hour)
+print("maximum value of weekly is:", max_value_week)
+print("maximum value of monthly is:", max_value_month)
+print("maximum value of yearly is:", max_value_year)
+print(groups)
 
 
+visa_data.loc[visa_data['wage_offer_from_9089'] < max_value_hour , 'wage_offer_unit_of_pay_9089'] = 'Hour'
+visa_data.loc[(visa_data['wage_offer_from_9089'] > max_value_hour) & (visa_data['wage_offer_from_9089'] < max_value_week) , 'wage_offer_unit_of_pay_9089'] = 'Week'
+visa_data.loc[(visa_data['wage_offer_from_9089'] > max_value_week) & (visa_data['wage_offer_from_9089'] < max_value_biweek), 'wage_offer_unit_of_pay_9089'] = 'Bi-Weekly'
+visa_data.loc[(visa_data['wage_offer_from_9089'] > max_value_biweek) & (visa_data['wage_offer_from_9089'] < max_value_month), 'wage_offer_unit_of_pay_9089'] = 'Month'
+visa_data.loc[(visa_data['wage_offer_from_9089'] > max_value_month) & (visa_data['wage_offer_from_9089'] < max_value_year) , 'wage_offer_unit_of_pay_9089'] = 'Year'
+visa_data.loc[visa_data['wage_offer_from_9089'] > max_value_year , 'wage_offer_unit_of_pay_9089'] = 'Unknown'
 
 visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9089'] \
          == 'Hour',visa_data['wage_offer_from_9089']*2080, \
