@@ -51,16 +51,14 @@ visa_data['country_of_citizenship'] = np.where(visa_data['country_of_citizenship
 #Remove instances if empty:
 visa_data = visa_data[visa_data['case_status'] != '']
 visa_data = visa_data[visa_data['decision_date'] != '']
-
-
 print(visa_data)
-#visa_data =visa_data[(visa_data['foreign_worker_info_education'] != '') & (visa_data['job_info_major'] != '')]
+visa_data =visa_data[visa_data['foreign_worker_info_education'] != '']
+visa_data= visa_data[visa_data['job_info_major'] != '']
 
 print(visa_data)
 
 #visa_data['wage_offered_from_9089'].to_csv('before.csv',sep=',')
 
-#visa_data = visa_data[visa_data['job_info_major'] != '']
 visa_data = visa_data[visa_data['job_info_alt_combo_ed'] != '']
 
 #visa_data['wage_offered_from_9089'].to_csv('after.csv',sep=',')
