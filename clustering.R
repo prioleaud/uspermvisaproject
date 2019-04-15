@@ -2,12 +2,12 @@ library(readxl)
 library(normalr)
 library(cluster)
 
-setwd("~/Courses/STA6707/Project/")
-
+#setwd("~/Courses/STA6707/Project/")
+setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=========================== Reading files ===============================#  
 
-data <- read.csv("clean_data.csv", sep = ',' , header = TRUE)
-
+#data <- read.csv("clean_data.csv", sep = ',' , header = TRUE)
+clustering <- function(data){
 anyNA(data)
 
 #=========================== Hierarchical Methods ===============================#  
@@ -202,4 +202,5 @@ plot(pam.uspermvisa.11)
 pam.uspermvisa.12 <- pam(data,k = 12)
 clusplot(pam.uspermvisa.12)
 plot(pam.uspermvisa.12)
+}
 
