@@ -14,11 +14,15 @@ path = os.path.join(os.path.dirname(__file__), 'clean_data.csv')
 visa_data = pd.read_csv(path)
 
 """ use Kiana Code to do the tasks """
-
+print(visa_data.size)
+print(visa_data.ndim)
+print(visa_data.shape)
 visa_data['employer_size'] = EmployerRangeMapping(visa_data)
 visa_data['Center'] = StateMapping(visa_data)
 visa_data['Career_Cluster'] = MajorMapping(visa_data)
-
+print(visa_data.size)
+print(visa_data.ndim)
+print(visa_data.shape)
 
 
 """ select the target variables and form the final data"""
