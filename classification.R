@@ -12,14 +12,15 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
   training <- data[train_ind,] #creates the training dataset with row numbers stored in train_ind
   testing <- data[-train_ind,]
+  training$case_status <- as.factor(training$case_status)
   
 #=================================== Define models=======================# 
-  trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 1, search="random", sampling = "smote")
+  trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 1, search="random")
   metric <- "Accuracy"
-  DT_model <- train(case_status~., data = training, method = "rpart", metric = metric,trControl=trctrl,tuneLength = 10)
-  Naive_model <- train(case_status~., data = training, method = "naive_bayes",trControl = trctrl)
-  RF_model <- train(case_status~., data = training, method = "rf", metric = metric, trControl = trctrl)
-  SVM_model <- train(case_status~., data = training, method = "svm", metric = metric,trControl=trctrl)
+  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.omit, metric = metric,trControl=trctrl)
+  Naive_model <- train(case_status~., data = training, na.action = na.omit, method = "naive_bayes",trControl = trctrl)
+  RF_model <- train(case_status~., data = training,na.action = na.omit, method = "rf", metric = metric, trControl = trctrl)
+  SVM_model <- train(case_status~., data = training, na.action = na.omit, method = "svm", metric = metric,trControl=trctrl)
 #============================ Predict using the test data=================#
   DT_predict <- predict(DT_model, newdata = testing)
   Naive_predict <-predict(Naive_model, newdata = testing)
@@ -31,10 +32,10 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   cm_RF <- confusionMatrix(RF_predict,testing$case_status)
   cm_svm <- confusionMatrix(svm_predict,testing$case_status)
 #============================ output files============================================
-  write.table(results_DT,paste(file,"_DT.txt",sep = ""),sep = "\t", row.names = FALSE)
-  write.table(results_NB,paste(file,"_NB.txt",sep = ""),sep = "\t", row.names = FALSE)
-  write.table(results_RF,paste(file,"_RF.txt",sep = ""),sep = "\t", row.names = FALSE)
-  write.table(results_svm,paste(file,"_svm.txt",sep = ""),sep = "\t", row.names = FALSE)
+  # write.table(results_DT,paste(file,"_DT.txt",sep = ""),sep = "\t", row.names = FALSE)
+  # write.table(results_NB,paste(file,"_NB.txt",sep = ""),sep = "\t", row.names = FALSE)
+  # write.table(results_RF,paste(file,"_RF.txt",sep = ""),sep = "\t", row.names = FALSE)
+  # write.table(results_svm,paste(file,"_svm.txt",sep = ""),sep = "\t", row.names = FALSE)
 #============================ output confusion matrices================
   write.table(as.matrix(cm_Naive),paste(file,"Naive_ref.txt",sep = ""),sep = "\t")
   write.table(as.matrix(cm_Naive, what = "overall"),paste(file,"Naive_overall.txt",sep = ""),sep = "\t")
