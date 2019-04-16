@@ -15,12 +15,12 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   training$case_status <- as.factor(training$case_status)
   
 #=================================== Define models=======================# 
-  trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 1, search="random")
+  trctrl <- trainControl(method = "cv", number = 10, repeats = 1, search="random")
   metric <- "Accuracy"
-  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.omit, metric = metric,trControl=trctrl)
-  Naive_model <- train(case_status~., data = training, na.action = na.omit, method = "naive_bayes",trControl = trctrl)
-  RF_model <- train(case_status~., data = training,na.action = na.omit, method = "rf", metric = metric, trControl = trctrl)
-  SVM_model <- train(case_status~., data = training, na.action = na.omit, method = "svm", metric = metric,trControl=trctrl)
+  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.omit, metric = metric)
+  Naive_model <- train(case_status~., data = training, na.action = na.omit, method = "naive_bayes")
+  RF_model <- train(case_status~., data = training,na.action = na.omit, method = "rf", metric = metric)
+  SVM_model <- train(case_status~., data = training, na.action = na.omit, method = "svm", metric = metric)
 #============================ Predict using the test data=================#
   DT_predict <- predict(DT_model, newdata = testing)
   Naive_predict <-predict(Naive_model, newdata = testing)
