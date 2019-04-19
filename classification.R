@@ -8,16 +8,18 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   
   anyNA(data)
   
-  smp_siz <- floor(0.7*nrow(data)) 
-  train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
+  # smp_siz <- floor(0.7*nrow(data)) 
+  # train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
+  set.seed(1234)
+  train_ind <- sample(1:nrow(data),0.5*nrow(data))
   training <- data[train_ind,] #creates the training dataset with row numbers stored in train_ind
   testing <- data[-train_ind,]
   training$case_status <- as.factor(training$case_status)
   
 #=================================== Define models=======================# 
-  trctrl <- trainControl(method = "cv", number = 10, repeats = 1, search="random")
+  # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
-  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.omit, metric = metric)
+  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.pass, metric = metric)
   Naive_model <- train(case_status~., data = training, na.action = na.omit, method = "naive_bayes")
   RF_model <- train(case_status~., data = training,na.action = na.omit, method = "rf", metric = metric)
   SVM_model <- train(case_status~., data = training, na.action = na.omit, method = "svm", metric = metric)
