@@ -196,7 +196,7 @@ transportation = [v.lower() for v in transportation]
 def RowMapping(row):
 	if type(row) is str:
 	    tags = row.split(" ")
-	    for item in tag:
+	    for item in tags:
 		    if item in Agriculture_careers:
 		    	cluster = 'Agriculture'
 		    	
