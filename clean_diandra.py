@@ -140,5 +140,7 @@ visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9
          == 'mth',visa_data['wage_offer_from_9089']*12, \
          visa_data['wage_offer_from_9089'])
 
+print(len(visa_data))
+
 visa_data.to_csv('clean_data.csv',sep=',')
 
