@@ -196,61 +196,63 @@ transportation = [v.lower() for v in transportation]
 def RowMapping(row):
 	if type(row) is str:
 	    tags = row.split(" ")
-	    print("row is :", tags)
-	    if tags[0] in Agriculture_careers:
-	    	cluster = 'Agriculture'
-	    	print("1")
-	    elif tags[0] in Architecture_majors:
-	    	cluster = 'Architecture'
-	    	print("2")
-	    elif tags[0] in Arts_majors:
-	    	cluster = 'Arts'
-	    	print("3")
-	    elif tags[0] in Business_majors:
-	    	cluster = 'Business'
-	    	print("4")
-	    elif tags[0] in Education_majors:
-	    	cluster = 'Education'
-	    	print("5")
-	    elif tags[0] in Science_majors:
-	    	cluster = 'Other Sciences'
-	    	print("6")
-	    elif tags[0] in csMath_majors:
-	    	cluster = 'Computer Science and Mathematics'
-	    	print("7")
-	    elif tags[0] in Health_sciences:
-	    	cluster = 'Health Sciences'
-	    	print("8")
-	    elif tags[0] in Eng_majors:
-	    	cluster = 'Engineering'
-	    	print("9")
-	    elif tags[0] in Hospitality:
-	    	cluster = 'Hospitality'
-	    	print("10")
-	    elif tags[0] in Human_Services:
-	    	cluster = 'Human_Services'
-	    	print("11")
-	    elif tags[0] in Law_public_safety:
-	    	cluster ='Law and public safety'
-	    	print("12")
-	    elif tags[0] in manufacturing:
-	    	cluster = 'Manufacturing'
-	    	print("13")
-	    elif tags[0] in transportation:
-	    	cluster = 'Transportation'
-	    	print("14")
-	    else:
-	    	cluster = 'Unknown'
-	    	print("15")
-	    return cluster
+	    for item in tag:
+		    if item in Agriculture_careers:
+		    	cluster = 'Agriculture'
+		    	
+		    elif item in Architecture_majors:
+		    	cluster = 'Architecture'
+		    	
+		    elif item in Arts_majors:
+		    	cluster = 'Arts'
+		    	
+		    elif item in Business_majors:
+		    	cluster = 'Business'
+		  
+		    elif item in Education_majors:
+		    	cluster = 'Education'
+		    	
+		    elif item in Science_majors:
+		    	cluster = 'Other Sciences'
+		    	
+		    elif item in csMath_majors:
+		    	cluster = 'Computer Science and Mathematics'
+		    	
+		    elif item in Health_sciences:
+		    	cluster = 'Health Sciences'
+		    	
+		    elif item in Eng_majors:
+		    	cluster = 'Engineering'
+		    	
+		    elif item in Hospitality:
+		    	cluster = 'Hospitality'
+		    	
+		    elif item in Human_Services:
+		    	cluster = 'Human_Services'
+		    	
+		    elif item in Law_public_safety:
+		    	cluster ='Law and public safety'
+		    	
+		    elif item in manufacturing:
+		    	cluster = 'Manufacturing'
+		    	
+		    elif item in transportation:
+		    	cluster = 'Transportation'
+		    	
+		    else:
+		    	cluster = 'Unknown'
+		    	
+		    return cluster
 	else:
-		return 'Invalid'
+		return 'Unknown'
 
 def MajorMapping(Df):
-	
+	#foreign worker info major mapping
 	Df['foreign_worker_info_major'] =Df['foreign_worker_info_major'].str.lower()
-	Df['Career_Cluster'] = 'Unknown'
-	Df['Career_Cluster'] = Df['foreign_worker_info_major'].apply(RowMapping)
-	return Df
+	Df['Applicant Major'] = 'Unknown'
+	Df['Applicant Major'] = Df['foreign_worker_info_major'].apply(RowMapping)
+
+	return Df['Applicant Major']
+#job info major mapping
 
 #Df[['foreign_worker_info_major','Career_Cluster']].to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/df_new.csv", index=False)

@@ -20,6 +20,7 @@ print(visa_data.shape)
 visa_data['employer_size'] = EmployerRangeMapping(visa_data)
 visa_data['Center'] = StateMapping(visa_data)
 visa_data['Career_Cluster'] = MajorMapping(visa_data)
+print("I am here!")
 print(visa_data.size)
 print(visa_data.ndim)
 print(visa_data.shape)
@@ -29,6 +30,6 @@ print(visa_data.shape)
 
 finalData = visa_data[['case_received_date','case_status','country_of_citizenship','decision_date','employer_state','employer_name','employer_yr_estab'
 						,'foreign_worker_info_birth_country','foreign_worker_info_education','job_info_alt_combo_ed', 'job_info_alt_occ_job_title', 'job_info_job_title',
-						'job_info_work_state','wage_offer_from_9089','wage_offer_unit_of_pay_9089','employer_size','Center','Career_Cluster' ]]
+						'job_info_work_state','wage_offer_from_9089','wage_offer_unit_of_pay_9089','employer_size','Center','Career_Cluster', 'us_economic_sector']]
 
 finalData.to_csv('Final_data.csv')
