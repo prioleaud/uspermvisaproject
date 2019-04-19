@@ -61,7 +61,7 @@ visa_data= visa_data[visa_data['job_info_major'] != '']
 #visa_data['wage_offered_from_9089'].to_csv('before.csv',sep=',')
 
 visa_data = visa_data[visa_data['job_info_alt_combo_ed'] != '']
-
+print("in clean_diandra beginning: ", visa_data.shape)
 #visa_data['wage_offered_from_9089'].to_csv('after.csv',sep=',')
 
 
@@ -140,5 +140,6 @@ visa_data['wage_offer_from_9089'] = np.where(visa_data['wage_offer_unit_of_pay_9
          == 'mth',visa_data['wage_offer_from_9089']*12, \
          visa_data['wage_offer_from_9089'])
 
+print("in clean_diandra: ", visa_data.shape)
 visa_data.to_csv('clean_data.csv',sep=',')
 
