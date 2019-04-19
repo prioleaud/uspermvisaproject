@@ -254,5 +254,13 @@ def MajorMapping(Df):
 
 	return Df['Applicant Major']
 #job info major mapping
+def JobMajorMapping(Df):
+    #foreign worker info major mapping
+    Df['job_info_major'] =Df['job_info_major'].str.lower()
+    Df['Job Major'] = 'Unknown'
+    Df['Job Major'] = Df['job_info_major'].apply(RowMapping)
+
+    return Df['Job Major']
+
 
 #Df[['foreign_worker_info_major','Career_Cluster']].to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/df_new.csv", index=False)
