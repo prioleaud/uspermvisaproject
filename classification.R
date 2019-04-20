@@ -8,7 +8,7 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
  
   data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
   
-  anyNA(data)
+  anyNA(data$case_status)
   
   # smp_siz <- floor(0.7*nrow(data)) 
   # train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
@@ -21,7 +21,7 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=================================== Define models=======================# 
   # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
-  DT_model <- rpart(case_status~., data = training, cp =0.2)
+  DT_model <- train(case_status~., data = training, method="rpart",na.action = na.pass, metric= metric)
   Naive_model <- train(case_status~., data = training, na.action = na.pass, method = "naive_bayes")
   RF_model <- train(case_status~., data = training,na.action = na.pass, method = "rf", metric = metric)
   SVM_model <- train(case_status~., data = training, na.action = na.pass, method = "svm", metric = metric)

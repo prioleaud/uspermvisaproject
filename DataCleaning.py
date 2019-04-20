@@ -30,7 +30,7 @@ print(visa_data.shape)
 """ select the target variables and form the final data"""
 
 finalData = visa_data[['case_received_date','case_status','country_of_citizenship','decision_date','employer_state','employer_yr_estab'
-						,'foreign_worker_info_birth_country','foreign_worker_info_education','job_info_alt_combo_ed',
+						,'foreign_worker_info_education','job_info_alt_combo_ed',
 						'job_info_work_state', 'us_economic_sector','wage_offer_from_9089','wage_offer_unit_of_pay_9089','employer_size','Center','Applicant Major','Career Major']]
 
 finalData.to_csv('Final_data.csv')
