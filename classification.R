@@ -1,4 +1,6 @@
 library(caret)
+library(rpart.plot)
+library(rpart)
 
 setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #setwd("~/HXRL/Github/uspermvisaproject/")
@@ -19,10 +21,14 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=================================== Define models=======================# 
   # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
-  DT_model <- train(case_status~., data = training, method = "rpart", na.action = na.pass, metric = metric)
-  Naive_model <- train(case_status~., data = training, na.action = na.omit, method = "naive_bayes")
-  RF_model <- train(case_status~., data = training,na.action = na.omit, method = "rf", metric = metric)
-  SVM_model <- train(case_status~., data = training, na.action = na.omit, method = "svm", metric = metric)
+  DT_model <- rpart(case_status~., data = training, method = "rpart", cp =0.2)
+  Naive_model <- train(case_status~., data = training, na.action = na.pass, method = "naive_bayes")
+  RF_model <- train(case_status~., data = training,na.action = na.pass, method = "rf", metric = metric)
+  SVM_model <- train(case_status~., data = training, na.action = na.pass, method = "svm", metric = metric)
+  #=================================== Visualizations of tree based methods=======================# 
+  rpart.plot(DT_model,box.palette = "RdBu",shadow.col = "gray", nn =TRUE)
+  Importance.RF <- varImp(RF_model)
+  plot(Importance.complete, top = 10)
 #============================ Predict using the test data=================#
   DT_predict <- predict(DT_model, newdata = testing)
   Naive_predict <-predict(Naive_model, newdata = testing)
