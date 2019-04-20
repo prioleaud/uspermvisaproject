@@ -21,7 +21,7 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=================================== Define models=======================# 
   # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
-  DT_model <- rpart(case_status~., data = training, method = "rpart", cp =0.2)
+  DT_model <- rpart(case_status~., data = training, cp =0.2)
   Naive_model <- train(case_status~., data = training, na.action = na.pass, method = "naive_bayes")
   RF_model <- train(case_status~., data = training,na.action = na.pass, method = "rf", metric = metric)
   SVM_model <- train(case_status~., data = training, na.action = na.pass, method = "svm", metric = metric)
