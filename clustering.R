@@ -3,7 +3,7 @@ library(normalr)
 library(cluster)
 
 setwd("~/HXRL/Github/uspermvisaproject/")
-#setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
+# setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=========================== Reading files ===============================#  
 
 data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
