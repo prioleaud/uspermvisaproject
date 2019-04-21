@@ -132,7 +132,7 @@ def ListOfState (c) :
 	if state=='WYOMING':
 		return 'WY'
 
-Df['job_info_work_state'] = Df['job_info_work_state'].apply(ListOfState)
+visa_data['job_info_work_state'] = visa_data['job_info_work_state'].apply(ListOfState)
 """ select the target variables and form the final data"""
 
 finalData = visa_data[['case_received_date','case_status','country_of_citizenship','decision_date','employer_name','employer_state','employer_yr_estab'
