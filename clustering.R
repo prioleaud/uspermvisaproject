@@ -2,8 +2,8 @@ library(readxl)
 library(normalr)
 library(cluster)
 
-setwd("~/HXRL/Github/uspermvisaproject/")
-#setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
+# setwd("~/HXRL/Github/uspermvisaproject/")
+setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=========================== Reading files ===============================#  
 
 data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
@@ -18,14 +18,14 @@ data$employer_yr_estab[data$employer_yr_estab == 20] <- 1995
 data$decision_date <- as.factor(data$decision_date)
 data$employer_yr_estab <- as.factor(data$employer_yr_estab)
 data$wage_offer_from_9089 <- as.integer(data$wage_offer_from_9089)
-data$employer_state <- as.character(data$employer_state)
-data$job_info_work_state <- as.character(data$job_info_work_state)
+data$Employer.State <- as.character(data$Employer.State)
+data$Job.State <- as.character(data$Job.State)
 data <- data[!is.na(data$employer_yr_estab), ]
 data$employer_size[data$employer_size==""]<-"Unknown"
-data$job_info_work_state[data$job_info_work_state==""]<-"Unknown"
-data$employer_state[data$employer_state==""]<-"Unknown"
-data$employer_state <- as.factor(data$employer_state)
-data$job_info_work_state <- as.factor(data$job_info_work_state)
+data$Job.State[data$Job.State==""]<-"Unknown"
+data$Employer.State[data$Employer.State==""]<-"Unknown"
+data$Employer.State <- as.factor(data$Employer.State)
+data$Job.State <- as.factor(data$Job.State)
 
 #=========================== Subsampling ===============================#  
 
