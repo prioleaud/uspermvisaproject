@@ -2,18 +2,51 @@ library(readxl)
 library(normalr)
 library(cluster)
 
-#setwd("~/Courses/STA6707/Project/")
-setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
+setwd("~/HXRL/Github/uspermvisaproject/")
+#setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=========================== Reading files ===============================#  
 
-#data <- read.csv("clean_data.csv", sep = ',' , header = TRUE)
-clustering <- function(data){
+data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
+
 anyNA(data)
+
+data <- data[,!(names(data) %in% c("X","job_info_alt_occ_job_title","job_info_job_title","wage_offer_unit_of_pay_9089"))]
+
+data$employer_yr_estab[data$employer_yr_estab == 14] <- 1986
+data$employer_yr_estab[data$employer_yr_estab == 20] <- 1995
+
+data$decision_date <- as.factor(data$decision_date)
+data$employer_yr_estab <- as.factor(data$employer_yr_estab)
+data$wage_offer_from_9089 <- as.integer(data$wage_offer_from_9089)
+data$employer_state <- as.character(data$employer_state)
+data$job_info_work_state <- as.character(data$job_info_work_state)
+data <- data[!is.na(data$employer_yr_estab), ]
+data$employer_size[data$employer_size==""]<-"Unknown"
+data$job_info_work_state[data$job_info_work_state==""]<-"Unknown"
+data$employer_state[data$employer_state==""]<-"Unknown"
+data$employer_state <- as.factor(data$employer_state)
+data$job_info_work_state <- as.factor(data$job_info_work_state)
+
+#=========================== Subsampling ===============================#  
+
+smp_siz <- floor(0.1*nrow(data))  # creates a value for dividing the data into train and test. In this case the value is defined as 70% of the number of rows in the dataset
+smp_siz  # shows the value of the sample size
+
+train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
+
+data.sub <- data[train_ind,] #creates the training dataset with row numbers stored in train_ind
+data.test <- data[-train_ind,]
+
+write.csv(data.sub, "subsample_train.csv")
+write.csv(data.test, "subsample_test.csv")
+
+visa.diss <- daisy(data.sub[,!(names(data.sub) %in% c("us_economic_sector"))], metric = "gower", type = list(ordratio = c(1,4,6)))
+
 
 #=========================== Hierarchical Methods ===============================#  
 
 #Single-Linkage
-uspermvisa_sgl = agnes(data,diss = F, metric = "euclidean", stand = F, method = "single")
+uspermvisa_sgl = agnes(visa.diss,diss = T, metric = "euclidean", stand = F, method = "single")
 grp <- cutree(uspermvisa_sgl,k=3)
 table(grp)
 
@@ -45,7 +78,7 @@ grp <- cutree(uspermvisa_sgl,k=12)
 table(grp)
 
 #Complete Linkage
-uspermvisa_com = agnes(data,diss = F, metric = "euclidean", stand = F, method = "complete")
+uspermvisa_com = agnes(visa.diss,diss = T, metric = "euclidean", stand = F, method = "complete")
 grp <- cutree(uspermvisa_com,k=3)
 table(grp)
 
@@ -202,5 +235,5 @@ plot(pam.uspermvisa.11)
 pam.uspermvisa.12 <- pam(data,k = 12)
 clusplot(pam.uspermvisa.12)
 plot(pam.uspermvisa.12)
-}
+
 
