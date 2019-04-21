@@ -10,7 +10,6 @@ data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
 
 anyNA(data)
 
-data <- data[,!(names(data) %in% c("X","job_info_alt_occ_job_title","job_info_job_title","wage_offer_unit_of_pay_9089"))]
 
 data$employer_yr_estab[data$employer_yr_estab == 14] <- 1986
 data$employer_yr_estab[data$employer_yr_estab == 20] <- 1995
@@ -26,6 +25,8 @@ data$Job.State[data$Job.State==""]<-"Unknown"
 data$Employer.State[data$Employer.State==""]<-"Unknown"
 data$Employer.State <- as.factor(data$Employer.State)
 data$Job.State <- as.factor(data$Job.State)
+
+data <- data[,!(names(data) %in% c("X","job_info_alt_occ_job_title","job_info_job_title","wage_offer_unit_of_pay_9089","us_economic_sector","country_of_citizenship"))]
 
 #=========================== Subsampling ===============================#  
 
@@ -148,7 +149,7 @@ plot(uspermvisa_avg)
 
 #Divisive Method
 
-uspermvisa_div = diana(data, diss = F, metric = "euclidean", stand = F)
+uspermvisa_div = diana(visa.diss, diss = T, metric = "euclidean", stand = F)
 
 plot(uspermvisa_div)
 
@@ -196,43 +197,43 @@ pca.uspermvisa <- princomp(scale(data))
 plot(pca.uspermvisa$scores[,1:2],col=cl12$cluster,pch=cl12$cluster,main="K-Means: 12 Clusters")
 
 #PAM 
-pam.uspermvisa.3 <- pam(data,k = 3)
+pam.uspermvisa.3 <- pam(visa.diss, diss= T, k = 3)
 clusplot(pam.uspermvisa.3)
 plot(pam.uspermvisa.3)
 
-pam.uspermvisa.3 <- pam(data,k = 4)
+pam.uspermvisa.4 <- pam(data.sub,k = 4)
 clusplot(pam.uspermvisa.4)
 plot(pam.uspermvisa.4)
 
-pam.uspermvisa.5 <- pam(data,k = 5)
+pam.uspermvisa.5 <- pam(data.sub,k = 5)
 clusplot(pam.uspermvisa.5)
 plot(pam.uspermvisa.5)
 
-pam.uspermvisa.6 <- pam(data,k = 6)
+pam.uspermvisa.6 <- pam(data.sub,k = 6)
 clusplot(pam.uspermvisa.6)
 plot(pam.uspermvisa.6)
 
-pam.uspermvisa.7 <- pam(data,k = 7)
+pam.uspermvisa.7 <- pam(data.sub,k = 7)
 clusplot(pam.uspermvisa.7)
 plot(pam.uspermvisa.7)
 
-pam.uspermvisa.8 <- pam(data,k = 8)
+pam.uspermvisa.8 <- pam(data.sub,k = 8)
 clusplot(pam.uspermvisa.8)
 plot(pam.uspermvisa.8)
 
-pam.uspermvisa.9 <- pam(data,k = 9)
+pam.uspermvisa.9 <- pam(data.sub,k = 9)
 clusplot(pam.uspermvisa.9)
 plot(pam.uspermvisa.9)
 
-pam.uspermvisa.10 <- pam(data,k = 10)
+pam.uspermvisa.10 <- pam(data.sub,k = 10)
 clusplot(pam.uspermvisa.10)
 plot(pam.uspermvisa.10)
 
-pam.uspermvisa.11 <- pam(data,k = 11)
+pam.uspermvisa.11 <- pam(data.sub,k = 11)
 clusplot(pam.uspermvisa.11)
 plot(pam.uspermvisa.11)
 
-pam.uspermvisa.12 <- pam(data,k = 12)
+pam.uspermvisa.12 <- pam(data.sub,k = 12)
 clusplot(pam.uspermvisa.12)
 plot(pam.uspermvisa.12)
 
