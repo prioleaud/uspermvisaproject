@@ -12,7 +12,14 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   data$decision_date <- as.factor(data$decision_date)
   data$employer_yr_estab <- as.factor(data$employer_yr_estab)
   data$wage_offer_from_9089 <- as.integer(data$wage_offer_from_9089)
- 
+  data$employer_state <- as.character(data$employer_state)
+  data$job_info_work_state <- as.character(data$job_info_work_state)
+  data <- data[!is.na(data$employer_yr_estab), ]
+  data$employer_size[data$employer_size==""]<-"Unknown"
+  data$job_info_work_state[data$job_info_work_state==""]<-"Unknown"
+  data$employer_state[data$employer_state==""]<-"Unknown"
+  data$employer_state <- as.factor(data$employer_state)
+  data$job_info_work_state <- as.factor(data$job_info_work_state)
   # train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
   set.seed(1234)
   train_ind <- sample(1:nrow(data),0.5*nrow(data))
@@ -20,8 +27,8 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   testing <- data[-train_ind,]
   # training$case_status <- as.factor(training$case_status)
   
-training_new <- subset(training, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089))
-testing_new <- subset(testing, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089))
+training_new <- subset(training, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name))
+testing_new <- subset(testing, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name))
 #=================================== Define models=======================# 
   # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
