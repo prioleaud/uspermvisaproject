@@ -262,5 +262,124 @@ def JobMajorMapping(Df):
 
     return Df['Job Major']
 
+def ListOfState (c) :
+	List_State=['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','MD','ME','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC',
+	'ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY']
+	if c in List_State:
+		pass 
+	elif c=='ALABAMA':
+		return 'AL'
+	elif c=='ALASKA':
+		return 'AK'
+	elif c=='ARIZONA':
+		return 'AZ'
+	elif c=='ARKANSAS':
+		return 'AR'
+	elif c=='CALIFORNIA':
+		return 'CA'
+	elif c=='COLORADO':
+		return 'CO'
+	elif c=='CONNECTICUT':
+		return 'CT'
+	elif c=='DELAWARE':
+		return 'DE'
+	elif c=='FLORIDA':
+		return 'FL'
+	elif c=='GEORGIA':
+		return 'GA'
+	elif c=='HAWAII':
+		return 'HI'
+	elif c=='IDAHO':
+		return 'ID'
+	elif c=='ILLINOIS':
+		return 'IL'
+	elif c=='INDIANA':
+		return 'IN'
+	elif c=='IOWA':
+		return 'IA'
+	elif c=='KANSAS':
+		return 'KS'
+	elif c=='KENTUCKY':
+		return 'KY'
+	elif c=='LOUISIANA':
+		return 'LA'
+	elif c=='MAINE':
+		return 'ME'
+	elif c=='MARYLAND':
+		return 'MD'
+	elif c=='MASSACHUSETTS':
+		return 'MA'
+	elif c=='MICHIGAN':
+		return 'MI'
+	elif c=='MINNESOTA':
+		return 'MN'
+	elif c=='MISSISSIPPI':
+		return 'MS'
+	elif c=='MISSOURI':
+		return 'MO'
+	elif c=='MONTANA':
+		return 'MT'
+	elif c=='NEBRASKA':
+		return 'NE'
+	elif c=='NEVADA':
+		return 'NV'
+	elif c=='NEW HAMPSHIRE':
+		return 'NH'
+	elif c=='NEW JERSEY':
+		return 'NJ'
+	elif c=='NEW MEXICO':
+		return 'NM'
+	elif c=='NEW YORK':
+		return 'NY'
+	elif c=='NORTH CAROLINA':
+		return 'NC'
+	elif c=='NORTH DAKOTA':
+		return 'ND'
+	elif c=='OHIO':
+		return 'OH'
+	elif c=='OKLAHOMA':
+		return 'OK'
+	elif c=='OREGON':
+		return 'OR'
+	elif c=='PENNSYLVANIA':
+		return 'PA'
+	elif c=='RHODE ISLAND':
+		return 'RI'
+	elif c=='SOUTH CAROLINA':
+		return 'SC'
+	elif c=='SOUTH DAKOTA':
+		return 'SD'
+	elif c=='TENNESSEE':
+		return 'TN'
+	elif c=='TEXAS':
+		return 'TX'
+	elif c=='UTAH':
+		return 'UT'
+	elif c=='VERMONT':
+		return 'VT'
+	elif c=='VIRGINIA':
+		return 'VG'
+	elif c=='WASHINGTON':
+		return 'WA'
+	elif c=='WEST VIRGINIA':
+		return 'WV'
+	elif c=='WISCONSIN':
+		return 'WI'
+	elif c=='WYOMING':
+		return 'WY'
 
+def JobStateListMapping(Df):
+    #foreign worker info major mapping
+    Df['job_info_work_state'] =Df['job_info_work_state'].str.upper()
+    Df['Job State'] = 'Unknown'
+    Df['Job State'] = Df['job_info_work_state'].apply(ListOfState)
+
+    return Df['Job State']
+
+def EmployerStateListMapping(Df):
+	Df['employer_state'] = Df['employer_state'].str.upper()
+	Df['Employer State'] = 'Unknown'
+	Df['Employer State'] = Df['employer_state'].apply(ListOfState)
+
+	return Df['Employer State']
 #Df[['foreign_worker_info_major','Career_Cluster']].to_csv("/Users/kianamac/Dropbox (UFL)/courses/Spring 2019/MultivariateDataAnalysis/project/df_new.csv", index=False)
