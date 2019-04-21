@@ -1,27 +1,30 @@
 library(caret)
 library(rpart.plot)
 library(rpart)
-
-setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
-#setwd("~/HXRL/Github/uspermvisaproject/")
+library(randomForest)
+#setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
+setwd("~/HXRL/Github/uspermvisaproject/")
 #=========================== Reading files ===============================#  
  
   data <- read.csv("Final_data.csv", sep = ',' , header = TRUE)
   
   anyNA(data$case_status)
-  data$decision_date <- as.factor(data$decision_date)
-  data$employer_yr_estab <- as.factor(data$employer_yr_estab)
+  data$employer_yr_estab[data$employer_yr_estab == 14] <- 1986
+  data$employer_yr_estab[data$employer_yr_estab == 20] <- 1995
+  
+  #data$decision_date <- as.ordered(data$decision_date)
+  #data$employer_yr_estab <- as.ordered(data$employer_yr_estab)
   data$wage_offer_from_9089 <- as.integer(data$wage_offer_from_9089)
-  data$employer_state <- as.character(data$employer_state)
-  data$job_info_work_state <- as.character(data$job_info_work_state)
+  data$Employer.State <- as.character(data$Employer.State)
+  data$Job.State <- as.character(data$Job.State)
   data <- data[!is.na(data$employer_yr_estab), ]
   
   data$employer_size[data$employer_size==""]<-"Unknown"
-  data$job_info_work_state[data$job_info_work_state==""]<-"Unknown"
-  data$employer_state[data$employer_state==""]<-"Unknown"
+  data$Job.State[data$Job.State==""]<-"Unknown"
+  data$Employer.State[data$Employer.State==""]<-"Unknown"
   
-  data$employer_state <- as.factor(data$employer_state)
-  data$job_info_work_state <- as.factor(data$job_info_work_state)
+  data$Employer.State <- as.factor(data$Employer.State)
+  data$Job.State <- as.factor(data$Job.State)
   # train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
   set.seed(1234)
   train_ind <- sample(1:nrow(data),10000)
@@ -29,15 +32,16 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   testing <- data[-train_ind,]
   # training$case_status <- as.factor(training$case_status)
   
-training_new <- subset(training, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name))
-testing_new <- subset(testing, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name))
+training_new <- subset(training, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name,country_of_citizenship))
+testing_new <- subset(testing, select=-c(X, us_economic_sector, wage_offer_unit_of_pay_9089,employer_name,country_of_citizenship))
 #=================================== Define models=======================# 
   # trctrl <- trainControl(method = "cv", number = 10, search="random")
   metric <- "Accuracy"
   DT_model <- train(case_status~., data = training_new, method="rpart",na.action = na.pass, metric= metric)
   Naive_model <- train(case_status~., data = training_new, method = "naive_bayes",na.action = na.pass)
-  RF_model <- train(case_status~., data = training_new, method = "rf",na.action = na.pass, metric = metric)
-  SVM_model <- train(case_status~., data = training_new, method = "svmLinear",na.action = na.pass, metric = metric)
+  #RF_model <- train(case_status~., data = training_new, method = "rf",na.action = na.pass, metric = metric)
+  RF_model <- randomForest(formula = case_status~., data = training_new, ntree = 1000, importance = T)
+   SVM_model <- train(case_status~., data = training_new, method = "svmLinear",na.action = na.pass, metric = metric)
   #=================================== Visualizations of tree based methods=======================# 
   # rpart.plot(DT_model,box.palette = "RdBu",shadow.col = "gray", nn =TRUE)
   Importance.RF <- varImp(RF_model)
