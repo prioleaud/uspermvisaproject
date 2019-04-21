@@ -1,7 +1,8 @@
 library(readxl)
 library(normalr)
 library(cluster)
-
+require(graphics)
+library(Rtsne)
 # setwd("~/HXRL/Github/uspermvisaproject/")
 setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
 #=========================== Reading files ===============================#  
@@ -41,8 +42,12 @@ data.test <- data[-train_ind,]
 write.csv(data.sub, "subsample_train.csv")
 write.csv(data.test, "subsample_test.csv")
 
-visa.diss <- daisy(data.sub[,!(names(data.sub) %in% c("us_economic_sector"))], metric = "gower", type = list(ordratio = c(1,4,6)))
+visa.diss <- daisy(data.sub[,!(names(data.sub) %in% c("us_economic_sector"))], metric = "gower", type = list(ordratio = c(1,3,6)))
+#MDS results 
+fit <- cmdscale(visa.diss,eig=TRUE, k=2) 
 
+tsne_label <- data$case_status
+data$case_status <- as.factor(data$case_status)
 
 #=========================== Hierarchical Methods ===============================#  
 
@@ -79,7 +84,7 @@ grp <- cutree(uspermvisa_sgl,k=12)
 table(grp)
 
 #Complete Linkage
-uspermvisa_com = agnes(visa.diss,diss = T, metric = "euclidean", stand = F, method = "complete")
+uspermvisa_com = agnes(data.sub,diss = FALSE, metric = "euclidean", stand = F, method = "complete")
 grp <- cutree(uspermvisa_com,k=3)
 table(grp)
 
@@ -205,7 +210,7 @@ pam.uspermvisa.4 <- pam(data.sub,k = 4)
 clusplot(pam.uspermvisa.4)
 plot(pam.uspermvisa.4)
 
-pam.uspermvisa.5 <- pam(data.sub,k = 5)
+pam.uspermvisa.5 <- pam(data.sub, diss = FALSE, k = 5)
 clusplot(pam.uspermvisa.5)
 plot(pam.uspermvisa.5)
 
