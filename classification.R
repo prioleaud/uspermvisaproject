@@ -15,14 +15,16 @@ setwd("/Users/kianamac/Documents/GitHub/uspermvisaproject/")
   data$employer_state <- as.character(data$employer_state)
   data$job_info_work_state <- as.character(data$job_info_work_state)
   data <- data[!is.na(data$employer_yr_estab), ]
+  
   data$employer_size[data$employer_size==""]<-"Unknown"
   data$job_info_work_state[data$job_info_work_state==""]<-"Unknown"
   data$employer_state[data$employer_state==""]<-"Unknown"
+  
   data$employer_state <- as.factor(data$employer_state)
   data$job_info_work_state <- as.factor(data$job_info_work_state)
   # train_ind <- sample(seq_len(nrow(data)),size = smp_siz, replace = FALSE)  # Randomly identifies the rows equal to sample size ( defined in previous instruction) from  all the rows of Smarket dataset and stores the row number in train_ind
   set.seed(1234)
-  train_ind <- sample(1:nrow(data),0.5*nrow(data))
+  train_ind <- sample(1:nrow(data),10000)
   training <- data[train_ind,] #creates the training dataset with row numbers stored in train_ind
   testing <- data[-train_ind,]
   # training$case_status <- as.factor(training$case_status)
